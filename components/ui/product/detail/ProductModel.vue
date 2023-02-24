@@ -18,7 +18,7 @@
           </div>
           <div class="float-right">
             <div class="text-lg font-normal">
-              {{ getMinProductPrice(item.model) }}
+              ราคาเริ่มต้น {{ getMinProductPrice(item.model) }}
             </div>
           </div>
         </div>
@@ -28,8 +28,9 @@
 </template>
 
 <script>
-// import _ from 'lodash'
+import _ from 'lodash'
 import { mapMutations } from 'vuex'
+import { formatPrice } from '@/utils'
 
 export default {
   name: 'ProductModel',
@@ -48,7 +49,8 @@ export default {
       selectModel: 'SELECT_MODEL',
     }),
     getMinProductPrice(model) {
-      return ''
+      const result = _(model).flatMap('data').map('price').value()
+      return formatPrice(_.min(result), true) || ''
     },
     selectItem(name, index) {
       this.selectModel(name)

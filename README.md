@@ -20,13 +20,3 @@ $ npm run generate
 ## Node.JS Version
 
 `Node.JS Version >= 16`
-
-
-## Release Note
-
-This sample project is in progress and it will be updated every night.
-
-### `Demo`
-
-See the demo at [Netlify](https://eloquent-pavlova-f9c239.netlify.app/).
-
