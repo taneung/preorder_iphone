@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'SF Pro +TH';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SF Pro +TH'), url('~assets/fonts/SFProTH.woff2') format('woff2');
+}
+
+html,
+body {
+  font-family: 'SF Pro +TH', sans-serif;
+  min-height: 100%;
+}
+
+#app {
+  font-family: 'SF Pro +TH', sans-serif;
+}
+
+.home-title {
+    font-family: 'SF Pro +TH', sans-serif;
+// background-color: rgb(168, 36, 36);
+}
