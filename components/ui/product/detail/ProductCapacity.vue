@@ -35,7 +35,7 @@ export default {
     },
   },
   data: () => ({
-    activeIndex: 0,
+    activeIndex: undefined,
   }),
   methods: {
     ...mapMutations('product', {
@@ -45,6 +45,7 @@ export default {
       this.selectCapacity(name)
       this.activeIndex = index
       console.log('name.id: ', name.id)
+      this.$emit('updateProductId')
     },
     setPrice(price) {
       return formatPrice(price, true)

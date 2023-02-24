@@ -5,6 +5,7 @@ export const state = () => ({
   selectCapacity: {},
   selectShipment: 'atStore',
   preOrderProductCheckout: {},
+  productId: null,
 })
 
 export const getters = {
@@ -14,6 +15,7 @@ export const getters = {
   getColor: ({ selectColor }) => selectColor,
   getCapacity: ({ selectCapacity }) => selectCapacity,
   getShipment: ({ selectShipment }) => selectShipment,
+  getProductId: ({ productId }) => productId,
 }
 
 export const mutations = {
@@ -28,6 +30,7 @@ export const mutations = {
   },
   SELECT_CAPACITY(state, value) {
     state.selectCapacity = value
+    state.productId = value.id
   },
   SELECT_SHIPMENT(state, value) {
     state.selectShipment = value
@@ -44,8 +47,11 @@ export const actions = {
       commit('SET_PRODUCT_DETAIL', products)
     }
   },
-  savePreOrder({ commit }, item) {
-    commit('SET_PREORDER_PRODUCT_CHECKOUT', item)
+  async savePreOrder({ commit }, id) {
+    const preorder = await this.$repositories.product.preorderProduct(id)
+    if (preorder) {
+      commit('SET_PREORDER_PRODUCT_CHECKOUT', preorder)
+    }
   },
   clearPreOrder({ commit }) {
     commit('SET_PREORDER_PRODUCT_CHECKOUT', {})

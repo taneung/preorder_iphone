@@ -4,7 +4,11 @@
       <h4 class="text-black text-2xl font-bold">ขนาด</h4>
       <div>
         <div
-          class="w-full rounded-lg border-2 border-grey-300 hover:border-green p-5 my-4 cursor-pointer"
+          :class="
+            shipment === 'atStore'
+            ? 'w-full rounded-lg border-2 border-green p-5 my-4 cursor-pointer'
+            : 'w-full rounded-lg border-2 border-grey-300 hover:border-grey-400 p-5 my-4 cursor-pointer'
+          "
           @click="selectItem('atStore')"
         >
             <div class="mx-2 w-12 h-10 float-left">
@@ -18,7 +22,11 @@
           <div class="font-normal text-base text-grey-500">จองเริ่มต้นเพียง ฿3,000 เท่านั้น</div>
         </div>
         <div
-          class="w-full rounded-lg border-2 border-grey-300 hover:border-green p-5 my-4 cursor-pointer"
+          :class="
+            shipment === 'delivery'
+            ? 'w-full rounded-lg border-2 border-green p-5 my-4 cursor-pointer'
+            : 'w-full rounded-lg border-2 border-grey-300 hover:border-grey-400 p-5 my-4 cursor-pointer'
+          "
           @click="selectItem('delivery')"
         >
             <div class="mx-2  w-12 h-10 float-left">
@@ -42,8 +50,7 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'ProductDelivery',
   data: () => ({
-    items: {},
-    isSelected: false,
+    shipment: 'atStore',
   }),
   methods: {
     ...mapMutations('product', {
@@ -51,7 +58,7 @@ export default {
     }),
     selectItem(name) {
       this.selectShipment(name)
-      console.log('shippment: ', name)
+      this.shipment = name
     },
   },
 }
