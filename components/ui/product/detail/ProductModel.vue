@@ -17,7 +17,7 @@
             <div class="text-xl font-bold">{{ item.name }}</div>
           </div>
           <div class="float-right">
-            <div class="text-lg font-normal">
+            <div class="text-lg font-normal text-right">
               ราคาเริ่มต้น {{ getMinProductPrice(item.model) }}
             </div>
           </div>

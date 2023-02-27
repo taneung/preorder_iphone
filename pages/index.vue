@@ -1,32 +1,34 @@
 <template>
-  <div class="container mx-auto my-12 grid grid-cols-2 gap-4">
-    <aside class="sticky top-24 max-h-screen">
-      <img
-        :src="productImg"
-        alt="iPhone 13"
-        class="object-contain"
-        loading="lazy"
-      />
-    </aside>
-    <div class="w-fit">
-      <h2 class="text-black text-4xl font-bold">ซื้อ {{ setModel || 'iPhone 12' }}</h2>
-      <ProductModel :product-items="productItems" />
-      <ProductColor :color-list="colorList" />
-      <ProductCapacity :capacity-list="capacityList" @updateProductId="enableBtn" />
-      <ProductDelivery />
-      <div class="border-t border-grey-400 mt-10 mb-5"></div>
-      <div class="items-center py-3">
-        <button
-          id="ok-btn"
-          :class="
-            productId !== null
-            ? 'text-white bg-green px-4 py-2 text-white text-base font-medium rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300'
-            : 'text-white bg-grey-300 px-4 py-2 text-white text-base font-medium rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-grey-400'
-          "
-          @click="confirmOrder"
-        >
-          ยืนยันการสั่งซื้อล่วงหน้า
-        </button>
+  <div>
+    <div class="px-2 container mx-auto my-12 flex flex-col md:flex-row lg:flex-row xl:flex-row justify-between">
+      <aside class="top-24 max-h-screen xs:w-full sm:w-full md:max-xl:w-1/2 md:sticky flex items-start justify-center">
+        <img
+          :src="productImg"
+          alt="iPhone 13"
+          class="object-contain"
+          loading="lazy"
+        />
+      </aside>
+      <div class="xs:mx-2 xs:w-full sm:w-full md:max-xl:w-1/2">
+        <h2 class="text-black text-4xl font-bold">ซื้อ {{ setModel || 'iPhone' }}</h2>
+        <ProductModel :product-items="productItems" />
+        <ProductColor :color-list="colorList" />
+        <ProductCapacity :capacity-list="capacityList" @updateProductId="enableBtn" />
+        <ProductDelivery />
+        <div class="border-t border-grey-400 mt-10 mb-5"></div>
+        <div class="items-center py-3">
+          <button
+            id="ok-btn"
+            :class="
+              productId !== null
+              ? 'text-white bg-green px-4 py-2 text-white text-base font-medium rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300'
+              : 'text-white bg-grey-300 px-4 py-2 text-white text-base font-medium rounded-md w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-grey-400'
+            "
+            @click="confirmOrder"
+          >
+            ยืนยันการสั่งซื้อล่วงหน้า
+          </button>
+        </div>
       </div>
     </div>
     <div v-if="isPreorder">
@@ -75,8 +77,11 @@ export default {
     setModel() {
       if (this.getModel.name) {
         this.setColor()
-        this.setModelPhoto()
         this.setCapacity()
+        this.setModelPhoto()
+        return this.getModel.name
+      } else if (this.getColor?.color) {
+        this.setModelPhoto()
         return this.getModel.name
       } else {
         return 'iPhone'
@@ -111,8 +116,8 @@ export default {
       this.colorList = this.getModel
     },
     setCapacity() {
-      if (this.getCapacity.data) {
-        this.capacityList = this.getCapacity
+      if(this.getColor.color) {
+        this.capacityList = this.getColor
       } else {
         const newCapacity = this.getModel
         this.capacityList = newCapacity.model[0]

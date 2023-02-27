@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto h-16 flex justify-between items-center">
+  <div class="container mx-auto h-16 flex flex-col items-center md:flex-row lg:flex-row xl:flex-row justify-between">
     <h3 class="text-grey-500 text-sm float-left">
       Copyright © Interview. All rights reserved.
     </h3>
